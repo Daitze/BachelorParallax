@@ -22,6 +22,8 @@ namespace Util::Math {
 
 Vector2D::Vector2D(double x, double y) : x(x), y(y) {}
 
+Vector2D::Vector2D(double x, double y, int layerPosition) : x(x), y(y), layerPosition(layerPosition){}
+
 Vector2D Vector2D::operator*(double value) const {
     return { x * value, y * value };
 }
@@ -65,6 +67,10 @@ double Vector2D::getX() const {
 
 double Vector2D::getY() const {
     return y;
+}
+
+double Vector2D::getLayerPosition() const {
+    return layerPosition;
 }
 
 }

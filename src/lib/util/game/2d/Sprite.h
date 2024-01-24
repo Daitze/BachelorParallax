@@ -52,6 +52,7 @@ public:
      */
     Sprite(const String &path, double width, double height);
 
+    Sprite(const String &path, double width, double height, const Math::Vector2D &position);
     /**
      * Copy Constructor.
      */
@@ -79,6 +80,8 @@ public:
 
     [[nodiscard]] double getAlpha() const;
 
+    [[nodiscard]] Math::Vector2D getPosition() const;
+
     void setScale(const Math::Vector2D &scale);
 
     void setScale(double scale);
@@ -96,7 +99,7 @@ public:
 private:
 
     Graphic::Image *image;
-
+    Math::Vector2D position;
     Math::Vector2D size;
     Math::Vector2D scale = Math::Vector2D(1, 1);
     double rotationAngle = 0;

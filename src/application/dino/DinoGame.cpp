@@ -35,6 +35,8 @@
 #include "lib/util/collection/Iterator.h"
 #include "lib/util/math/Vector3D.h"
 #include "GameOverScreen.h"
+#include "lib/util/game/2d/Background.h"
+
 
 DinoGame::DinoGame() {
     dino->addComponent(new Util::Game::D2::LinearMovementComponent(*dino));
@@ -52,14 +54,15 @@ DinoGame::DinoGame() {
 }
 
 void DinoGame::initializeBackground(Util::Game::Graphics &graphics) {
-    auto cloud1 = Util::Game::D2::Sprite("/initrd/dino/cloud1.bmp", 0.45, 0.15);
-    auto cloud3 = Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15);
-    auto cloud4 = Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15);
-
     graphics.clear(Util::Graphic::Color(57, 97, 255));
-    cloud1.draw(graphics, Util::Math::Vector2D(-1, 0.65));
-    cloud3.draw(graphics, Util::Math::Vector2D(0.2, 0.3));
-    cloud4.draw(graphics, Util::Math::Vector2D(0.65, 0.7));
+
+    Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
+        Util::Game::D2::Sprite("/initrd/dino/red.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.0,3)),
+        Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15, Util::Math::Vector2D(0.65, 0.0,1)),
+        Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.0,3))
+    }));
+
+
 }
 
 void DinoGame::update(double delta) {

@@ -40,6 +40,7 @@ target_sources(${PROJECT_NAME} PUBLIC
         ${HHUOS_SRC_DIR}/lib/util/game/2d/Polygon.cpp
         ${HHUOS_SRC_DIR}/lib/util/game/2d/Scene.cpp
         ${HHUOS_SRC_DIR}/lib/util/game/2d/Sprite.cpp
+        ${HHUOS_SRC_DIR}/lib/util/game/2d/Background.cpp #Neu hinzugefügt
         ${HHUOS_SRC_DIR}/lib/util/game/2d/SpriteAnimation.cpp
         ${HHUOS_SRC_DIR}/lib/util/game/2d/collider/PolygonCollider.cpp
         ${HHUOS_SRC_DIR}/lib/util/game/2d/collider/RectangleCollider.cpp

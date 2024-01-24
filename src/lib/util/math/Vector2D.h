@@ -33,6 +33,7 @@ public:
      */
     Vector2D(double x, double y);
 
+    Vector2D(double x, double y, int layerPosition);
     /**
      * Copy Constructor.
      */
@@ -70,10 +71,13 @@ public:
 
     [[nodiscard]] double getY() const;
 
+    [[nodiscard]] double getLayerPosition() const;
+
 private:
 
     double x = 0;
     double y = 0;
+    int layerPosition;
 };
 
 }

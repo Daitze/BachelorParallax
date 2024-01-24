@@ -31,7 +31,7 @@
 #include "lib/util/graphic/Color.h"
 #include "lib/util/game/ResourceManager.h"
 #include "lib/util/game/Graphics.h"
-
+#include "lib/util/math/Vector2D.h"
 namespace Util::Game::D2 {
 
 Sprite::Sprite() : size(0, 0) {
@@ -42,12 +42,29 @@ Sprite::Sprite() : size(0, 0) {
         ResourceManager::addImage("empty", image);
     }
 }
-
 Sprite::Sprite(const Util::String &path, double width, double height) : size(width, height) {
     auto transformation = GameManager::getTransformation();
     auto pixelWidth = static_cast<uint16_t>(width * transformation) + 1;
     auto pixelHeight = static_cast<uint16_t>(height * transformation) + 1;
     auto key = String::format("%s_%u_%u", static_cast<const char*>(path), pixelWidth, pixelHeight);
+
+    if (ResourceManager::hasImage(key)) {
+        image = ResourceManager::getImage(key);
+    } else {
+        auto *file = Graphic::BitmapFile::open(path);
+        image = file->scale(pixelWidth, pixelHeight);
+        delete file;
+
+        ResourceManager::addImage(key, image);
+    }
+}
+
+Sprite::Sprite(const Util::String &path, double width, double height, const Math::Vector2D &position) : size(width, height) {
+    auto transformation = GameManager::getTransformation();
+    auto pixelWidth = static_cast<uint16_t>(width * transformation) + 1;
+    auto pixelHeight = static_cast<uint16_t>(height * transformation) + 1;
+    auto key = String::format("%s_%u_%u", static_cast<const char*>(path), pixelWidth, pixelHeight);
+    Sprite::position = position;
 
     if (ResourceManager::hasImage(key)) {
         image = ResourceManager::getImage(key);
@@ -83,7 +100,9 @@ double Sprite::getRotation() const {
 double Sprite::getAlpha() const {
     return alpha;
 }
-
+Math::Vector2D Sprite::getPosition() const {
+    return position;
+}
 void Sprite::setScale(const Math::Vector2D &scale) {
     Sprite::scale = scale;
 }
@@ -111,5 +130,6 @@ void Sprite::flipX() {
 void Sprite::draw(const Graphics &graphics, const Math::Vector2D &position) const {
     graphics.drawImage2D(position, *image, xFlipped, alpha, scale, rotationAngle);
 }
+
 
 }
