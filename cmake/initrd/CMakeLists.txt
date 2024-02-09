@@ -53,6 +53,7 @@ else()
             COMMAND /bin/cp "$<TARGET_FILE:mkdir>" "${HHUOS_ROOT_DIR}/initrd/bin/mkdir"
             COMMAND /bin/cp "$<TARGET_FILE:mount>" "${HHUOS_ROOT_DIR}/initrd/bin/mount"
             COMMAND /bin/cp "$<TARGET_FILE:mouse>" "${HHUOS_ROOT_DIR}/initrd/bin/mouse"
+            COMMAND /bin/cp "$<TARGET_FILE:parallax>" "${HHUOS_ROOT_DIR}/initrd/bin/parallax"
             COMMAND /bin/cp "$<TARGET_FILE:ping>" "${HHUOS_ROOT_DIR}/initrd/bin/ping"
             COMMAND /bin/cp "$<TARGET_FILE:play>" "${HHUOS_ROOT_DIR}/initrd/bin/play"
             COMMAND /bin/cp "$<TARGET_FILE:ps>" "${HHUOS_ROOT_DIR}/initrd/bin/ps"
@@ -71,7 +72,7 @@ else()
             COMMAND /bin/cp -r "${CMAKE_BINARY_DIR}/asciimation" "${HHUOS_ROOT_DIR}/initrd"
             COMMAND /bin/tar -C "${HHUOS_ROOT_DIR}/initrd/" --xform s:'./':: -cf "${CMAKE_BINARY_DIR}/hhuOS.initrd" ./
             COMMAND /bin/rm -f "${HHUOS_ROOT_DIR}/hhuOS.img" "${HHUOS_ROOT_DIR}/hhuOS.iso"
-            DEPENDS asciimation music shell asciimate battlespace beep bug cat color cp date demo dino echo head hexdump ip kill ls lvgl_demo membench mkdir mount mouse ping play ps pwd rm rmdir shutdown smbios touch tree uecho unmount uptime view3d)
+            DEPENDS asciimation music shell asciimate battlespace beep bug cat color cp date demo dino echo head hexdump ip kill ls lvgl_demo membench mkdir mount mouse parallax ping play ps pwd rm rmdir shutdown smbios touch tree uecho unmount uptime view3d)
 
-    add_custom_target(${PROJECT_NAME} DEPENDS music asciimation shell asciimate battlespace beep bug cat color cp date demo dino echo head hexdump ip kill ls lvgl_demo membench mkdir mount mouse ping play ps pwd rm rmdir shutdown smbios touch tree uecho unmount uptime view3d "${CMAKE_BINARY_DIR}/hhuOS.initrd")
+    add_custom_target(${PROJECT_NAME} DEPENDS music asciimation shell asciimate battlespace beep bug cat color cp date demo dino echo head hexdump ip kill ls lvgl_demo membench mkdir mount mouse parallax ping play ps pwd rm rmdir shutdown smbios touch tree uecho unmount uptime view3d "${CMAKE_BINARY_DIR}/hhuOS.initrd")
 endif()

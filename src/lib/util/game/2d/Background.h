@@ -2,6 +2,8 @@
 #define BACHELORPARALLAX_BACKGROUND_H
 #include "lib/util/collection/Array.h"
 #include "Sprite.h"
+#include "lib/util/game/Camera.h"
+#include "lib/util/game/Scene.h"
 namespace Util {
     namespace Game {
         class Graphics;

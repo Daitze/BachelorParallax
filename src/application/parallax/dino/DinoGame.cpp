@@ -24,7 +24,6 @@
 #include "lib/util/game/Camera.h"
 #include "lib/util/game/2d/component/LinearMovementComponent.h"
 #include "lib/util/game/2d/component/GravityComponent.h"
-#include "Saw.h"
 #include "lib/util/game/GameManager.h"
 #include "application/dino/Ground.h"
 #include "lib/util/game/Game.h"
@@ -34,14 +33,12 @@
 #include "lib/util/math/Vector2D.h"
 #include "lib/util/collection/Iterator.h"
 #include "lib/util/math/Vector3D.h"
-#include "GameOverScreen.h"
 #include "lib/util/game/2d/Background.h"
 
 
 DinoGame::DinoGame() {
     dino->addComponent(new Util::Game::D2::LinearMovementComponent(*dino));
     dino->addComponent(new Util::Game::D2::GravityComponent(*dino, 1.25, 0));
-
     addObject(dino);
 
     for (uint32_t i = 0; i < 4; i++) {
@@ -55,20 +52,16 @@ DinoGame::DinoGame() {
 
 void DinoGame::initializeBackground(Util::Game::Graphics &graphics) {
     graphics.clear(Util::Graphic::Color(57, 97, 255));
-    /*Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
-        Util::Game::D2::Sprite("/initrd/dino/red.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.0,3)),
-        Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15, Util::Math::Vector2D(0.65, 0.0,1)),
-        Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.0,3))
-    }));*/
+    Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
+        Util::Game::D2::Sprite("/initrd/dino/treefar.bmp", 1, 2, Util::Math::Vector2D(0.5, -0.9,1)),
+        Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15, Util::Math::Vector2D(0.65, 0.7,1)),
+        Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.7,3))
+    }));
 
 }
 
 void DinoGame::update(double delta) {
-    if (dino->isDead()) {
-        auto &game = Util::Game::GameManager::getGame();
-        game.pushScene(new GameOverScreen(dino->getPoints()));
-        game.switchToNextScene();
-    } else if (dino->hasHatched() && !dino->isDying()) {
+    if (dino->hasHatched() && !dino->isDying()) {
         if (currentVelocity < MAX_VELOCITY) {
             currentVelocity += (delta / 100);
             if (currentVelocity >= DASH_VELOCITY) {
@@ -77,36 +70,15 @@ void DinoGame::update(double delta) {
         }
 
         dino->setVelocityX(currentVelocity);
-
-        if (obstacleCooldown <= 0) {
-            if (random.nextRandomNumber() < delta) {
-                auto positionY = ground.peek()->getPosition().getY() + ground.peek()->getCollider().getHeight() + (random.nextRandomNumber() < 0.75 ? 0 : + 0.3);
-                auto *saw = new Saw(Util::Math::Vector2D(getCamera().getPosition().getX() + 2, positionY));
-                obstacles.add(saw);
-                addObject(saw);
-                obstacleCooldown = OBSTACLE_COOLDOWN;
-            }
-        } else {
-            obstacleCooldown -= delta;
-        }
-
         if (ground.peek()->getPosition().getX() < getCamera().getPosition().getX() - 2.5) {
-            auto positionX = (static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 ;
+            auto positionX = (static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0;
             auto *newGround = new Ground(Util::Math::Vector2D(positionX, -1));
             removeObject(ground.poll());
             ground.offer(newGround);
             addObject(newGround);
         }
 
-        for (auto *tree : obstacles) {
-            if (tree->getPosition().getX() < getCamera().getPosition().getX() - 2) {
-                obstacles.remove(tree);
-                removeObject(tree);
-            }
-        }
-
         getCamera().setPosition(Util::Math::Vector2D(dino->getPosition().getX() + 0.8, 0));
-        dino->setPoints(static_cast<uint32_t>(getCamera().getPosition().getX()));
     }
 }
 
