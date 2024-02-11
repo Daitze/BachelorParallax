@@ -31,6 +31,7 @@ set(SOURCE_FILES
         ${HHUOS_SRC_DIR}/application/parallax/parallax.cpp
         ${HHUOS_SRC_DIR}/application/parallax/ninja/NinjaGame.cpp
         ${HHUOS_SRC_DIR}/application/parallax/ninja/Backgroundone.cpp
+        ${HHUOS_SRC_DIR}/application/parallax/ninja/Backgroundtwo.cpp
         )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

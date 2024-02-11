@@ -52,11 +52,11 @@ DinoGame::DinoGame() {
 
 void DinoGame::initializeBackground(Util::Game::Graphics &graphics) {
     graphics.clear(Util::Graphic::Color(57, 97, 255));
-    Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
+    /*Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
         Util::Game::D2::Sprite("/initrd/dino/treefar.bmp", 1, 2, Util::Math::Vector2D(0.5, -0.9,1)),
         Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15, Util::Math::Vector2D(0.65, 0.7,1)),
         Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.7,3))
-    }));
+    }));*/
 
 }
 

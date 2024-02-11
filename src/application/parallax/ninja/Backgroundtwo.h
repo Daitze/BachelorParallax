@@ -1,10 +1,11 @@
-#ifndef BACHELORPARALLAX_BACKGROUNDONE_H
-#define BACHELORPARALLAX_BACKGROUNDONE_H
+
+#ifndef BACHELORPARALLAX_BACKGROUNDTWO_H
+#define BACHELORPARALLAX_BACKGROUNDTWO_H
 #include <cstdint>
 
 #include "lib/util/game/2d/Entity.h"
 #include "lib/util/game/2d/Sprite.h"
-#include "lib/util/game/2d/Background.h"
+
 
 namespace Util {
     namespace Game {
@@ -17,33 +18,30 @@ namespace Util {
     namespace Math {
         class Vector2D;
     }  // namespace Math
-    namespace Io {
-        class Key;
-    }  // namespace Io
 }  // namespace Util
 
-class Backgroundone:public Util::Game::D2::Entity{
+class Backgroundtwo : public Util::Game::D2::Entity {
 
 public:
     /**
      * Default Constructor.
      */
-    explicit Backgroundone(const Util::Math::Vector2D &position, bool right,bool left, double parallaxValue);
+    explicit Backgroundtwo(const Util::Math::Vector2D &position);
 
     /**
      * Copy Constructor.
      */
-    Backgroundone(const Backgroundone &other) = delete;
+    Backgroundtwo(const Backgroundtwo &other) = delete;
 
     /**
      * Assignment operator.
      */
-    Backgroundone &operator=(const Backgroundone &other) = delete;
+    Backgroundtwo &operator=(const Backgroundtwo &other) = delete;
 
     /**
      * Destructor.
      */
-    ~Backgroundone() override = default;
+    ~Backgroundtwo() override = default;
 
     void initialize() override;
 
@@ -55,15 +53,10 @@ public:
 
     void draw(Util::Game::Graphics &graphics) override;
 
-    void setKeyboard(bool right,bool left);
-
     static const constexpr uint32_t TAG = 1;
 
 private:
-    bool leftKey;
-    bool rightKey;
-    double parallaxValue;
+
     Util::Game::D2::Sprite sprite;
-    Util::Game::D2::Background layerOne;
 };
-#endif //BACHELORPARALLAX_BACKGROUNDONE_H
+#endif //BACHELORPARALLAX_BACKGROUNDTWO_H

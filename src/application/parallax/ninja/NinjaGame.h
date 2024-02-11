@@ -11,6 +11,9 @@
 #include "lib/util/math/Vector2D.h"
 #include "lib/util/game/2d/Scene.h"
 #include "application/parallax/ninja/Backgroundone.h"
+#include "application/parallax/ninja/Backgroundtwo.h"
+#include "lib/util/game/2d/Background.h"
+#include "lib/util/game/Graphics.h"
 
 namespace Util {
     namespace Game {
@@ -45,7 +48,7 @@ public:
      */
     ~NinjaGame() override = default;
 
-    void update(double delta) override;
+    void update(double delta);
 
     void initializeBackground(Util::Game::Graphics &graphics) override;
 
@@ -54,9 +57,13 @@ public:
     void keyReleased(Util::Io::Key key) override;
 
 private:
-
     Ninja *ninja = new Ninja(Util::Math::Vector2D(-0.1414, -0.8));
     Util::ArrayBlockingQueue<Backgroundone*> backgroundq = Util::ArrayBlockingQueue<Backgroundone*>(2);
-
+    Util::ArrayBlockingQueue<Backgroundtwo*> backgroundw = Util::ArrayBlockingQueue<Backgroundtwo*>(2);
+    Util::ArrayBlockingQueue<Ninja*> ninjalist = Util::ArrayBlockingQueue<Ninja*>(2);
+    Backgroundone *background;
+    bool left;
+    bool right;
+    double X = 0.65;
 };
 #endif //BACHELORPARALLAX_NINJAGAME_H

@@ -54,12 +54,11 @@ Sprite::Sprite(const Util::String &path, double width, double height) : size(wid
         auto *file = Graphic::BitmapFile::open(path);
         image = file->scale(pixelWidth, pixelHeight);
         delete file;
-
         ResourceManager::addImage(key, image);
     }
 }
 
-Sprite::Sprite(const Util::String &path, double width, double height, const Math::Vector2D &position) : size(width, height) {
+Sprite::Sprite(const Util::String &path, double width, double height, const Math::Vector2D &position) : size(width, height), path(path) {
     auto transformation = GameManager::getTransformation();
     auto pixelWidth = static_cast<uint16_t>(width * transformation) + 1;
     auto pixelHeight = static_cast<uint16_t>(height * transformation) + 1;
@@ -75,6 +74,7 @@ Sprite::Sprite(const Util::String &path, double width, double height, const Math
 
         ResourceManager::addImage(key, image);
     }
+
 }
 
 const Graphic::Image& Sprite::getImage() const {
@@ -96,7 +96,9 @@ const Math::Vector2D &Sprite::getScale() const {
 double Sprite::getRotation() const {
     return rotationAngle;
 }
-
+String Sprite::getPath() const{
+    return path;
+}
 double Sprite::getAlpha() const {
     return alpha;
 }

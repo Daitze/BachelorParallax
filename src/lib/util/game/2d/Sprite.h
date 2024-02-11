@@ -82,6 +82,8 @@ public:
 
     [[nodiscard]] Math::Vector2D getPosition() const;
 
+    [[nodiscard]] String getPath() const;
+
     void setScale(const Math::Vector2D &scale);
 
     void setScale(double scale);
@@ -98,6 +100,7 @@ public:
 
 private:
 
+    String path;
     Graphic::Image *image;
     Math::Vector2D position;
     Math::Vector2D size;
