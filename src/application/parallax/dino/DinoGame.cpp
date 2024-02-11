@@ -21,25 +21,21 @@
 
 #include "application/dino/Dino.h"
 #include "lib/util/io/key/Key.h"
-#include "lib/util/game/Camera.h"
 #include "lib/util/game/2d/component/LinearMovementComponent.h"
 #include "lib/util/game/2d/component/GravityComponent.h"
 #include "lib/util/game/GameManager.h"
 #include "application/dino/Ground.h"
 #include "lib/util/game/Game.h"
 #include "lib/util/game/Graphics.h"
-#include "lib/util/game/2d/Sprite.h"
 #include "lib/util/graphic/Color.h"
 #include "lib/util/math/Vector2D.h"
-#include "lib/util/collection/Iterator.h"
-#include "lib/util/math/Vector3D.h"
-#include "lib/util/game/2d/Background.h"
+#include "application/parallax/dino/BackgroundFar.h"
 
 
 DinoGame::DinoGame() {
     dino->addComponent(new Util::Game::D2::LinearMovementComponent(*dino));
     dino->addComponent(new Util::Game::D2::GravityComponent(*dino, 1.25, 0));
-    addObject(dino);
+
 
     for (uint32_t i = 0; i < 4; i++) {
         auto *newGround = new Ground(Util::Math::Vector2D(getCamera().getPosition().getX() - 1.5 + i, -1));
@@ -52,34 +48,28 @@ DinoGame::DinoGame() {
 
 void DinoGame::initializeBackground(Util::Game::Graphics &graphics) {
     graphics.clear(Util::Graphic::Color(57, 97, 255));
-    /*Util::Game::D2::Background(graphics,Util::Array<Util::Game::D2::Sprite>({
-        Util::Game::D2::Sprite("/initrd/dino/treefar.bmp", 1, 2, Util::Math::Vector2D(0.5, -0.9,1)),
-        Util::Game::D2::Sprite("/initrd/dino/cloud3.bmp", 0.6, 0.15, Util::Math::Vector2D(0.65, 0.7,1)),
-        Util::Game::D2::Sprite("/initrd/dino/cloud4.bmp", 0.45, 0.15, Util::Math::Vector2D(0.65, 0.7,3))
-    }));*/
-
+    background = new BackgroundFar(Util::Math::Vector2D(getCamera().getPosition().getX(),0), dino->getVelocity().getX(), 0.01);
+    addObject(background);
+    addObject(dino);
 }
 
 void DinoGame::update(double delta) {
-    if (dino->hasHatched() && !dino->isDying()) {
-        if (currentVelocity < MAX_VELOCITY) {
-            currentVelocity += (delta / 100);
-            if (currentVelocity >= DASH_VELOCITY) {
-                dino->dash();
-            }
-        }
+    background->setVelocity(dino->getVelocity().getX());
+    background->setCameraPosition((static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 );
 
-        dino->setVelocityX(currentVelocity);
-        if (ground.peek()->getPosition().getX() < getCamera().getPosition().getX() - 2.5) {
-            auto positionX = (static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0;
-            auto *newGround = new Ground(Util::Math::Vector2D(positionX, -1));
-            removeObject(ground.poll());
-            ground.offer(newGround);
-            addObject(newGround);
-        }
+    dino->setVelocityX(currentVelocity);
 
-        getCamera().setPosition(Util::Math::Vector2D(dino->getPosition().getX() + 0.8, 0));
+
+    getCamera().setPosition(Util::Math::Vector2D(dino->getPosition().getX() + 0.8, 0));
+
+    if (ground.peek()->getPosition().getX() < getCamera().getPosition().getX() - 2.5) {
+        auto positionX = (static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 ;
+        auto *newGround = new Ground(Util::Math::Vector2D(positionX, -1));
+        removeObject(ground.poll());
+        ground.offer(newGround);
+        addObject(newGround);
     }
+
 }
 
 void DinoGame::keyPressed(Util::Io::Key key) {
@@ -87,13 +77,7 @@ void DinoGame::keyPressed(Util::Io::Key key) {
         case Util::Io::Key::ESC :
             Util::Game::GameManager::getGame().stop();
             break;
-        case Util::Io::Key::SPACE :
-            if (dino->hasHatched()) {
-                dino->jump();
-            } else {
-                dino->hatch();
-            }
-            break;
+
     }
 }
 

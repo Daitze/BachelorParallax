@@ -10,8 +10,8 @@
 #include "lib/util/collection/ArrayList.h"
 #include "lib/util/math/Vector2D.h"
 #include "lib/util/game/2d/Scene.h"
-#include "application/parallax/ninja/Backgroundone.h"
-#include "application/parallax/ninja/Backgroundtwo.h"
+#include "application/parallax/ninja/BackgroundOne.h"
+#include "application/parallax/ninja/BackgroundTwo.h"
 #include "lib/util/game/2d/Background.h"
 #include "lib/util/game/Graphics.h"
 
@@ -58,12 +58,7 @@ public:
 
 private:
     Ninja *ninja = new Ninja(Util::Math::Vector2D(-0.1414, -0.8));
-    Util::ArrayBlockingQueue<Backgroundone*> backgroundq = Util::ArrayBlockingQueue<Backgroundone*>(2);
-    Util::ArrayBlockingQueue<Backgroundtwo*> backgroundw = Util::ArrayBlockingQueue<Backgroundtwo*>(2);
-    Util::ArrayBlockingQueue<Ninja*> ninjalist = Util::ArrayBlockingQueue<Ninja*>(2);
-    Backgroundone *background;
-    bool left;
-    bool right;
-    double X = 0.65;
+    BackgroundOne *backgroundOne;
+    BackgroundTwo *backgroundTwo;
 };
 #endif //BACHELORPARALLAX_NINJAGAME_H

@@ -5,7 +5,7 @@
 
 #include "lib/util/game/2d/Entity.h"
 #include "lib/util/game/2d/Sprite.h"
-
+#include "lib/util/game/2d/Background.h"
 
 namespace Util {
     namespace Game {
@@ -20,28 +20,28 @@ namespace Util {
     }  // namespace Math
 }  // namespace Util
 
-class Backgroundtwo : public Util::Game::D2::Entity {
+class BackgroundTwo : public Util::Game::D2::Entity {
 
 public:
     /**
      * Default Constructor.
      */
-    explicit Backgroundtwo(const Util::Math::Vector2D &position);
+    explicit BackgroundTwo(const Util::Math::Vector2D &position, double playerVelocity, double parallaxValue);
 
     /**
      * Copy Constructor.
      */
-    Backgroundtwo(const Backgroundtwo &other) = delete;
+    BackgroundTwo(const BackgroundTwo &other) = delete;
 
     /**
      * Assignment operator.
      */
-    Backgroundtwo &operator=(const Backgroundtwo &other) = delete;
+    BackgroundTwo &operator=(const BackgroundTwo &other) = delete;
 
     /**
      * Destructor.
      */
-    ~Backgroundtwo() override = default;
+    ~BackgroundTwo() override = default;
 
     void initialize() override;
 
@@ -53,10 +53,13 @@ public:
 
     void draw(Util::Game::Graphics &graphics) override;
 
+    void setVelocity(double velocity);
+
     static const constexpr uint32_t TAG = 1;
 
 private:
-
-    Util::Game::D2::Sprite sprite;
+    double playerVelocity;
+    double parallaxValue;
+    Util::Game::D2::Background layerOne;
 };
 #endif //BACHELORPARALLAX_BACKGROUNDTWO_H

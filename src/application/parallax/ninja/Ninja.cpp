@@ -34,12 +34,6 @@ void Ninja::draw(Util::Game::Graphics &graphics) {
 
 
 void Ninja::onTranslationEvent(Util::Game::D2::TranslationEvent &event) {
-    const auto targetX = event.getTargetPosition().getX();
-    const auto maxX = Util::Game::GameManager::getRelativeResolution().getX();
-
-    if (targetX > maxX - 0.2 || targetX < -maxX) {
-        event.cancel();
-    }
 }
 
 void Ninja::onCollisionEvent(Util::Game::D2::CollisionEvent &event) {

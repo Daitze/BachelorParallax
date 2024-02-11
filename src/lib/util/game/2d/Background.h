@@ -1,7 +1,7 @@
 #ifndef BACHELORPARALLAX_BACKGROUND_H
 #define BACHELORPARALLAX_BACKGROUND_H
 
-#include "lib/util/collection/Array.h"
+#include "lib/util/collection/ArrayList.h"
 #include "lib/util/game/2d/Sprite.h"
 #include "lib/util/game/Camera.h"
 #include "lib/util/game/Scene.h"
@@ -17,20 +17,48 @@ namespace Util::Game::D2 {
     class Background{
 
     public:
+        /**
+        * Constructor.
+        */
         Background();
+        /**
+        * Constructor.
+        */
+        Background(const Array<Sprite> &sprites, double playerVelocity, double parallaxValue);
+        /**
+        * Constructor.
+        */
+        Background(const Array<Sprite> &sprites, double cameraPosition, double playerVelocity, double parallaxValue);
+        /**
+        * Copy Constructor.
+        */
+        Background(const Background &other) = delete;
 
-        Background(const Array<Sprite> &sprites, bool right,bool left, double parallaxValue);
+        /**
+         * Assignment operator.
+         */
+        Background &operator=(const Background &other) = delete;
+
+        /**
+         * Destructor.
+         */
+        ~Background() override = default;
 
         void update(double delta);
 
         void draw(const Graphics &graphics);
 
-        void setKeyboard(bool right,bool left);
+        void setVelocity(double velocity);
+
+        void setCameraPosition(double position);
+
     private:
         Array<Sprite> spriteList;
-        bool leftKey;
-        bool rightKey;
+        Array<Sprite> newSpriteList;
+        double playerVelocity;
+
         double parallaxValue;
+        double cameraPosition;
     };
 }
 #endif //BACHELORPARALLAX_BACKGROUND_H

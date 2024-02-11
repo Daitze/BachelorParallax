@@ -22,28 +22,28 @@ namespace Util {
     }  // namespace Io
 }  // namespace Util
 
-class Backgroundone:public Util::Game::D2::Entity{
+class BackgroundOne:public Util::Game::D2::Entity{
 
 public:
     /**
      * Default Constructor.
      */
-    explicit Backgroundone(const Util::Math::Vector2D &position, bool right,bool left, double parallaxValue);
+    explicit BackgroundOne(const Util::Math::Vector2D &position, double playerVelocity, double parallaxValue);
 
     /**
      * Copy Constructor.
      */
-    Backgroundone(const Backgroundone &other) = delete;
+    BackgroundOne(const BackgroundOne &other) = delete;
 
     /**
      * Assignment operator.
      */
-    Backgroundone &operator=(const Backgroundone &other) = delete;
+    BackgroundOne &operator=(const BackgroundOne &other) = delete;
 
     /**
      * Destructor.
      */
-    ~Backgroundone() override = default;
+    ~BackgroundOne() override = default;
 
     void initialize() override;
 
@@ -55,15 +55,14 @@ public:
 
     void draw(Util::Game::Graphics &graphics) override;
 
-    void setKeyboard(bool right,bool left);
+    void setVelocity(double velocity);
 
     static const constexpr uint32_t TAG = 1;
 
 private:
-    bool leftKey;
-    bool rightKey;
+
+    double playerVelocity;
     double parallaxValue;
-    Util::Game::D2::Sprite sprite;
     Util::Game::D2::Background layerOne;
 };
 #endif //BACHELORPARALLAX_BACKGROUNDONE_H

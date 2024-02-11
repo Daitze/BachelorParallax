@@ -27,11 +27,12 @@ set(SOURCE_FILES
         ${HHUOS_SRC_DIR}/application/parallax/dino/Dino.cpp
         ${HHUOS_SRC_DIR}/application/parallax/dino/DinoGame.cpp
         ${HHUOS_SRC_DIR}/application/parallax/dino/Ground.cpp
+        ${HHUOS_SRC_DIR}/application/parallax/dino/BackgroundFar.cpp
         ${HHUOS_SRC_DIR}/application/parallax/ninja/Ninja.cpp
         ${HHUOS_SRC_DIR}/application/parallax/parallax.cpp
         ${HHUOS_SRC_DIR}/application/parallax/ninja/NinjaGame.cpp
-        ${HHUOS_SRC_DIR}/application/parallax/ninja/Backgroundone.cpp
-        ${HHUOS_SRC_DIR}/application/parallax/ninja/Backgroundtwo.cpp
+        ${HHUOS_SRC_DIR}/application/parallax/ninja/BackgroundOne.cpp
+        ${HHUOS_SRC_DIR}/application/parallax/ninja/BackgroundTwo.cpp
         )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
