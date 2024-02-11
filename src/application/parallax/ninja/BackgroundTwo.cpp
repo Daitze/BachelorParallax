@@ -21,10 +21,14 @@ BackgroundTwo::BackgroundTwo(const Util::Math::Vector2D &position, double player
 
 void BackgroundTwo::initialize() {
     layerOne = Util::Game::D2::Background(Util::Array<Util::Game::D2::Sprite>({
-        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.2, 0.15, Util::Math::Vector2D(-0.6, -0.8)),
-        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.2, 0.15, Util::Math::Vector2D(-0.2, -0.8)),
+        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.3, 0.3, Util::Math::Vector2D(-0.6, -0.85)),
+        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.3, 0.3, Util::Math::Vector2D(-0.2, -0.85)),
         Util::Game::D2::Sprite("/initrd/parallax/brick.bmp", 0.2, 0.15, Util::Math::Vector2D(0, -0.8)),
         Util::Game::D2::Sprite("/initrd/parallax/item.bmp", 0.2, 0.15, Util::Math::Vector2D(0.5, -0.8)),
+        Util::Game::D2::Sprite("/initrd/parallax/brick.bmp", 0.2, 0.15, Util::Math::Vector2D(1, -0.8)),
+        Util::Game::D2::Sprite("/initrd/parallax/item.bmp", 0.2, 0.15, Util::Math::Vector2D(2, -0.8)),
+        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.3, 0.3, Util::Math::Vector2D(-1.5, -0.85)),
+        Util::Game::D2::Sprite("/initrd/parallax/bush.bmp", 0.3, 0.3, Util::Math::Vector2D(-1, -0.85)),
     }),playerVelocity,parallaxValue);
 }
 

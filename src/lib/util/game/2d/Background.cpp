@@ -22,7 +22,7 @@ namespace Util::Game::D2 {
                 auto newVector = Util::Math::Vector2D(newPositionX, spriteList[i].getPosition().getY());
                 spriteList[i] = Util::Game::D2::Sprite(spriteList[i].getPath(), spriteList[i].getSize().getX(),spriteList[i].getSize().getY(), newVector);
 
-                if (spriteList[i].getPosition().getX() < cameraPosition - 2.5 && cameraPosition!=0) {
+                if (spriteList[i].getPosition().getX() < cameraPosition - 4 && cameraPosition!=0) {
                     auto positionX = (static_cast<uint32_t>((cameraPosition + 1.5) * 10) / 5) * 5 / 10.0;
                     auto newVector = Util::Math::Vector2D(positionX, spriteList[i].getPosition().getY());
                     spriteList[i] = Util::Game::D2::Sprite(newSpriteList[i].getPath(),newSpriteList[i].getSize().getX(),newSpriteList[i].getSize().getY(), newVector);
@@ -36,7 +36,7 @@ namespace Util::Game::D2 {
                 auto newVector = Util::Math::Vector2D(newPositionX, spriteList[i].getPosition().getY());
                 spriteList[i] = Util::Game::D2::Sprite(spriteList[i].getPath(), spriteList[i].getSize().getX(),spriteList[i].getSize().getY(), newVector);
 
-                if (spriteList[i].getPosition().getX() < cameraPosition - 2.5 && cameraPosition!=0) {
+                if (spriteList[i].getPosition().getX() < cameraPosition - 4 && cameraPosition!=0) {
                     auto positionX = (static_cast<uint32_t>((cameraPosition + 1.5) * 10) / 5) * 5 / 10.0;
                     auto newVector = Util::Math::Vector2D(positionX, spriteList[i].getPosition().getY());
                     spriteList[i] = Util::Game::D2::Sprite(newSpriteList[i].getPath(),newSpriteList[i].getSize().getX(),newSpriteList[i].getSize().getY(), newVector);

@@ -11,6 +11,7 @@
 #include "lib/util/game/2d/Scene.h"
 #include "lib/util/game/2d/Background.h"
 #include "application/parallax/dino/BackgroundFar.h"
+#include "application/parallax/dino/BackgroundMiddle.h"
 
 namespace Util {
 namespace Game {
@@ -59,8 +60,9 @@ private:
 
     Util::ArrayBlockingQueue<Ground*> ground = Util::ArrayBlockingQueue<Ground*>(4);
     double currentVelocity = START_VELOCITY;
-    static const constexpr double START_VELOCITY = 0.25;
-    BackgroundFar *background;
+    static const constexpr double START_VELOCITY = 0.1;
+    BackgroundFar *backgroundFar;
+    BackgroundMiddle *backgroundMid;
 
 };
 

@@ -30,7 +30,7 @@
 #include "lib/util/graphic/Color.h"
 #include "lib/util/math/Vector2D.h"
 #include "application/parallax/dino/BackgroundFar.h"
-
+#include "application/parallax/dino/BackgroundMiddle.h"
 
 DinoGame::DinoGame() {
     dino->addComponent(new Util::Game::D2::LinearMovementComponent(*dino));
@@ -48,17 +48,20 @@ DinoGame::DinoGame() {
 
 void DinoGame::initializeBackground(Util::Game::Graphics &graphics) {
     graphics.clear(Util::Graphic::Color(57, 97, 255));
-    background = new BackgroundFar(Util::Math::Vector2D(getCamera().getPosition().getX(),0), dino->getVelocity().getX(), 0.01);
-    addObject(background);
+    backgroundFar = new BackgroundFar(Util::Math::Vector2D(getCamera().getPosition().getX(),0), dino->getVelocity().getX(), 0.003);
+    backgroundMid = new BackgroundMiddle(Util::Math::Vector2D(getCamera().getPosition().getX(),0), dino->getVelocity().getX(), 0.005);
+    addObject(backgroundFar);
+    addObject(backgroundMid);
     addObject(dino);
 }
 
 void DinoGame::update(double delta) {
-    background->setVelocity(dino->getVelocity().getX());
-    background->setCameraPosition((static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 );
+    backgroundFar->setVelocity(dino->getVelocity().getX());
+    backgroundFar->setCameraPosition((static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 );
+    backgroundMid->setVelocity(dino->getVelocity().getX());
+    backgroundMid->setCameraPosition((static_cast<uint32_t>((getCamera().getPosition().getX() + 1.5) * 10) / 5) * 5 / 10.0 );
 
     dino->setVelocityX(currentVelocity);
-
 
     getCamera().setPosition(Util::Math::Vector2D(dino->getPosition().getX() + 0.8, 0));
 

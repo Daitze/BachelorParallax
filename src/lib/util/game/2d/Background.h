@@ -29,20 +29,7 @@ namespace Util::Game::D2 {
         * Constructor.
         */
         Background(const Array<Sprite> &sprites, double cameraPosition, double playerVelocity, double parallaxValue);
-        /**
-        * Copy Constructor.
-        */
-        Background(const Background &other) = delete;
 
-        /**
-         * Assignment operator.
-         */
-        Background &operator=(const Background &other) = delete;
-
-        /**
-         * Destructor.
-         */
-        ~Background() override = default;
 
         void update(double delta);
 

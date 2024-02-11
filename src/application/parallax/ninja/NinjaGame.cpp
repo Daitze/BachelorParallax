@@ -55,10 +55,10 @@ void NinjaGame::keyPressed(Util::Io::Key key) {
             Util::Game::GameManager::getGame().stop();
             break;
         case Util::Io::Key::LEFT :
-            ninja->setVelocityX(-1);
+            ninja->setVelocityX(-0.5);
             break;
         case Util::Io::Key::RIGHT :
-            ninja->setVelocityX(1);
+            ninja->setVelocityX(0.5);
             break;
         default:
             break;
